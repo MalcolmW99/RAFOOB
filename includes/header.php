@@ -113,9 +113,9 @@ Global 			$UnitSelected;
 //	echo $updatesql;
 					$updateresult = mysqli_query($selected, $updatesql);
 					$forcesql = sprintf("SELECT `unit`.`Unit`,`force index`.`Force`,`force`.`Force` AS `Force Type`, `countries`.`Country_Name` FROM unit\n"
-						. "LEFT JOIN `ww2db`.`force index` ON `unit`.`Force` = `force index`.`Force ID` \n"
-						. "LEFT JOIN `ww2db`.`force` ON `force index`.`Force Type` = `force`.`Force ID`\n"
-						. "LEFT JOIN `ww2db`.`countries` ON `unit`.`Country` = `countries`.`Country_ID`\n"
+						. "LEFT JOIN `w2db`.`force index` ON `unit`.`Force` = `force index`.`Force ID` \n"
+						. "LEFT JOIN `w2db`.`force` ON `force index`.`Force Type` = `force`.`Force ID`\n"
+						. "LEFT JOIN `w2db`.`countries` ON `unit`.`Country` = `countries`.`Country_ID`\n"
 						. "WHERE `unit`.`Unit` = '%s' ", $UnitSelected);
 //	echo $forcesql;
 					$forceresult = mysqli_query($selected, $forcesql);
