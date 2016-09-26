@@ -250,7 +250,7 @@ Function getOOBAdmin_OLD ($unit, $chosenDate, $level, $selected)
 		Where unit.Unit = '%s' AND '%s' BETWEEN unithigh.`Start Date` AND unithigh.`End Date`
 		AND '%s' BETWEEN unitstatusb.`Start Date` AND unitstatusb.`End Date`
 		AND '%s' BETWEEN unitco.`Start Date` AND unitco.`End Date`
-		And  unitco.`Rank Index` = 1 And unithigh.`Higher Type` LIKE '%s' 
+		And  unitco.`Rank Index` = 1 And unitstatusb.`Higher Type` LIKE '%s' 
 		Order By `unit type`.`Level No`, unit1.`Unit Number`", $unit, $chosenDate, $chosenDate, $chosenDate, $H_Type);
 //		echo $SQL;
 
