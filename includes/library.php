@@ -1,5 +1,5 @@
 <?php
-$maxOOBdepth = 6;
+$maxOOBdepth = 10;
 /**
  * @author 
  * @copyright 2013
@@ -239,19 +239,15 @@ Function getOOBAdmin_OLD ($unit, $chosenDate, $level, $selected)
 			{return $OOBCount;}
 		$SQL = sprintf("Select unit.Unit, unit1.Unit As Unit1, `unit type`.`Level No`, unit1.`Unit Number`, person.`Full Name`, location.Location,
         status.Status, unitstatusb.Comment, unitstatusb.`Start Date`, unitstatusb.`End Date`, unitstatusb.Higher
-		From unithigh Inner Join unit On unithigh.`Higher ID` = unit.Unit_ID
-		Inner Join unit unit1 On unithigh.`Unit ID` = unit1.Unit_ID
+		From unitstatusb Inner Join unit On unitstatusb.Higher = unit.Unit_ID
+		Inner Join unit unit1 On unitstatusb.Unit = unit1.Unit_ID
 		Inner Join `unit type` On unit1.`Unit Type` = `unit type`.`Unittype ID`
-		Inner Join unitco On unitco.`Unit ID` = unit1.Unit_ID
-		Inner Join person On unitco.`Person ID` = person.ID
-		Inner Join unitstatusb On unit1.Unit_ID = unitstatusb.Unit
 		Inner Join status On unitstatusb.Status = status.StatusID
+		Inner Join person On unitstatusb.CO = person.ID
 		Inner Join location On unitstatusb.Location = location.LocID
-		Where unit.Unit = '%s' AND '%s' BETWEEN unithigh.`Start Date` AND unithigh.`End Date`
-		AND '%s' BETWEEN unitstatusb.`Start Date` AND unitstatusb.`End Date`
-		AND '%s' BETWEEN unitco.`Start Date` AND unitco.`End Date`
-		And  unitco.`Rank Index` = 1 And unithigh.`Higher Type` LIKE '%s' 
-		Order By `unit type`.`Level No`, unit1.`Unit Number`", $unit, $chosenDate, $chosenDate, $chosenDate, $H_Type);
+		Where unit.Unit = '%s' AND '%s' BETWEEN unitstatusb.`Start Date` AND unitstatusb.`End Date`
+		And  unitstatusb.`Higher Type` LIKE '%s' 
+		Order By `unit type`.`Level No`, unit1.`Unit Number`", $unit, $chosenDate, $H_Type);
 //		echo $SQL;
 
 		$result = mysqli_query($selected, $SQL);
